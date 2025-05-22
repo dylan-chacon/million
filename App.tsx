@@ -6,29 +6,16 @@
  */
 
 import React from 'react';
-import {
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AppNavigator from './src/navigation';
 
 const queryClient = new QueryClient();
 
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
-      <View style={backgroundStyle} />
+      <AppNavigator />
     </QueryClientProvider>
   );
 }
