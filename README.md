@@ -1,97 +1,148 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Million - Real State App
 
-# Getting Started
+## Overview
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Million is a React Native application that displays cryptocurrency information. The app features a list of cryptocurrencies with detailed views, built using modern React Native architecture with TypeScript.
 
-## Step 1: Start Metro
+## Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 📱 Cross-platform (iOS & Android)
+- 🔍 Real-time cryptocurrency search
+- 📊 Detailed cryptocurrency information
+- ♾️ Infinite scrolling
+- 🎨 Modern UI with React Native components
+- ⚡ Performance optimized
+- 🔄 Automatic data refresh
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Project Structure
 
-```sh
-# Using npm
-npm start
+### Core Files
+- `App.tsx` - Main application entry point with React Query provider
+- `index.js` - React Native app registration
+- `package.json` - Project dependencies and scripts
 
-# OR using Yarn
-yarn start
+### Source Code (`src`)
+```
+src/
+├── modules/crypto/          # Cryptocurrency module
+│   ├── hooks/              # Custom hooks for data fetching
+│   ├── models/             # Data models and interfaces
+│   ├── screen/             # Screen components
+│   └── store/              # State management
+├── navigation/              # App navigation setup
+└── shared/                  # Shared components and utilities
+    └── components/
+        └── organisms/       # Complex UI components
 ```
 
-## Step 2: Build and run your app
+## Architecture
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Navigation
+The app uses React Navigation with a stack navigator:
 
-### Android
+- **CryptoList**: Main screen showing list of cryptocurrencies
+- **CryptoDetail**: Detail screen for individual cryptocurrency
 
-```sh
-# Using npm
-npm run android
+### Data Models
 
-# OR using Yarn
-yarn android
+#### Crypto Interface
+```typescript
+interface Crypto {
+  id: string;
+  symbol: string;
+  name: string;
+  rank: number;
+  price_usd: string;
+  percent_change_1h: string;
+  percent_change_24h: string;
+  percent_change_7d: string;
+  market_cap_usd: string;
+  volume24: number;
+  csupply: string;
+  tsupply: string;
+  msupply: string | null;
+}
 ```
 
-### iOS
+### State Management
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+- **Zustand Store** (`useCryptoStore`) - Managing cryptocurrency list, search functionality, and loading states
+- **React Query** (`useFetchCryptos`) - Server state management with infinite scrolling and cache management
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## Key Components
 
+### Screens
+
+#### CryptoListScreen
+- Displays cryptocurrency list with search functionality
+- Implements infinite scrolling with FlatList
+- Performance optimized with `removeClippedSubviews`
+
+#### CryptoDetailScreen
+- Shows detailed cryptocurrency information
+- Receives data via navigation parameters
+
+### Components
+
+#### CryptoCard
+Reusable card component displaying:
+- Cryptocurrency name and symbol
+- Current price
+- Market cap
+- 24h price change
+- Navigation to detail screen
+
+## Getting Started
+
+### Prerequisites
+Complete the [React Native environment setup](https://reactnative.dev/docs/set-up-your-environment).
+
+### Installation
 ```sh
+# Install dependencies
+npm install
+
+# iOS specific (CocoaPods)
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
+### Running the App
 ```sh
-# Using npm
-npm run ios
+# Start Metro
+npm start
 
-# OR using Yarn
-yarn ios
+# Run on Android
+npm run android
+
+# Run on iOS
+npm run ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Key Technologies
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- **React Native**: Cross-platform mobile development
+- **TypeScript**: Type-safe development
+- **React Query**: Server state management
+- **Zustand**: Lightweight state management
+- **React Navigation**: Navigation library
 
-## Step 3: Modify your app
+## Platform Configuration
 
-Now that you have successfully run the app, let's make changes!
+### Android
+- Main application: `android/app/src/main/java/com/million/MainApplication.kt`
+- Supports both old and new React Native architecture
+- Hermes JavaScript engine enabled
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### iOS
+- App delegate: `ios/Million/AppDelegate.swift`
+- CocoaPods dependencies: `ios/Podfile`
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## Development Tools
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### Configuration Files
+- `.eslintrc.js` - ESLint configuration
+- `.prettierrc.js` - Code formatting rules
+- `babel.config.js` - Babel transpilation setup
+- `metro.config.js` - Metro bundler configuration
+- `tsconfig.json` - TypeScript configuration
