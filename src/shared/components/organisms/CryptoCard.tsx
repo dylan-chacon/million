@@ -16,7 +16,12 @@ const CryptoCard = React.memo(({ coin }: Props) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <Pressable onPress={() => navigation.navigate('CryptoDetail', { coin })}>
+    <Pressable
+      onPress={() => navigation.navigate('CryptoDetail', { coin })}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={`View details for ${coin.name}`}
+      accessibilityHint="Navigates to the cryptocurrency detail screen">
       <View style={styles.card}>
         <Text style={styles.title}>
           {coin.name} ({coin.symbol})

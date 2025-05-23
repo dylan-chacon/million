@@ -14,21 +14,22 @@ export default function CryptoListScreen() {
   }, [hasNextPage, fetchNextPage]);
 
   if (isLoading) {
-    return <ActivityIndicator size="large" style={styles.loader} />;
+    return <ActivityIndicator testID="activity-indicator" size="large" style={styles.loader} />;
   }
   if (error) {
-    return <Text style={styles.errorText}>Error al cargar datos</Text>;
+    return <Text testID="error-text" style={styles.errorText}>Error al cargar datos</Text>;
   }
 
   return (
     <View style={styles.container}>
       <TextInput
+        testID="search-input"
         placeholder="Search coin..."
         value={search}
         onChangeText={setSearch}
-        style={styles.input}
       />
       <FlatList
+        testID="flat-list"
         data={filtered}
         keyExtractor={item => item.id}
         renderItem={({ item }) => <CryptoCard coin={item} />}
