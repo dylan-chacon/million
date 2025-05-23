@@ -100,7 +100,7 @@ Complete the [React Native environment setup](https://reactnative.dev/docs/set-u
 ### Installation
 ```sh
 # Install dependencies
-npm install
+yarn install
 
 # iOS specific (CocoaPods)
 bundle install
@@ -110,13 +110,13 @@ bundle exec pod install
 ### Running the App
 ```sh
 # Start Metro
-npm start
+yarn start
 
 # Run on Android
-npm run android
+yarn android
 
 # Run on iOS
-npm run ios
+yarn ios
 ```
 
 ## Key Technologies
